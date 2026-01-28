@@ -18,6 +18,7 @@ public class BattleEngine {
             ArrayList<GameTransaction> transactions = new ArrayList<>();
 
             processTurn(p1, p2, transactions);
+            if (!p2.isAlive()) break; // Stop if p2 died during p1's turn
             processTurn(p2, p1, transactions);
 
             GameBlock block = new GameBlock(
@@ -34,6 +35,10 @@ public class BattleEngine {
 
         System.out.println("🏆 WINNER: " + (p1.isAlive() ? p1.id : p2.id));
         System.out.println("Blockchain valid: " + Blockchain.isChainValid());
+
+        // Print and Save the chain
+        Blockchain.printChain();
+        Blockchain.saveChainToFile("blockchain_data.txt");
     }
 
     private static void processTurn(Player attacker, Player defender, ArrayList<GameTransaction> txs) {

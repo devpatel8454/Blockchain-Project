@@ -8,4 +8,9 @@ public class GameTransaction {
         this.action = action;
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return playerId + ":" + action + ":" + value;
+    }
 }
