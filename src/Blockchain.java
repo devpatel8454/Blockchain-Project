@@ -13,12 +13,14 @@ public class Blockchain {
     }
 
     public static boolean isChainValid() {
+        String target = new String(new char[difficulty]).replace('\0', '0');
         for (int i = 1; i < chain.size(); i++) {
             GameBlock current = chain.get(i);
             GameBlock previous = chain.get(i - 1);
 
             if (!current.hash.equals(current.calculateHash())) return false;
             if (!current.previousHash.equals(previous.hash)) return false;
+            if (!current.hash.substring(0, difficulty).equals(target)) return false;
         }
         return true;
     }

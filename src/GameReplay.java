@@ -14,6 +14,10 @@ public class GameReplay {
                 switch (tx.action) {
                     case "ATTACK":
                         defender.health -= tx.value;
+                        defender.defense = 0;
+                        break;
+                    case "DEFEND":
+                        attacker.defense = tx.value;
                         break;
                     case "HEAL":
                         attacker.health += tx.value;
