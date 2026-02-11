@@ -1,91 +1,113 @@
-# ⚔️ BlockBattle: Blockchain-Powered Combat Simulator
+# ⚔️ BlockBattle: Full-Stack Blockchain Combat Simulator
 
-**BlockBattle** is a sophisticated Java implementation that merges turn-based combat mechanics with blockchain technology. Every action taken by players is cryptographically secured, bundled into blocks, and appended to an immutable ledger, ensuring the integrity and transparency of the entire match history.
+**BlockBattle** is a cutting-edge demonstration of merging turn-based combat mechanics with decentralized ledger technology. This project features a robust **Java Core** for low-level blockchain logic and a modern **React Frontend** for an interactive, visual gaming experience.
+
+Every action—be it a strike, a defense, or a healing potion—is cryptographically secured, verified through a **Merkle Tree**, and mined into an immutable blockchain.
 
 ---
 
 ## 🌟 Key Features
 
-- **🛡️ Strategic Combat**: A turn-based system where players choose to **Attack**, **Defend**, or **Heal**.
-- **⛓️ Robust Blockchain**: A custom-built blockchain implementation featuring SHA-256 hashing and block linking.
-- **⛏️ Proof-of-Work (PoW)**: Implements a mining mechanism where each block must solve a cryptographic puzzle before being added to the chain.
-- **📜 Immutable Ledger**: Every game event is recorded as a transaction, creating a permanent, tamper-proof record of the battle.
-- **✅ Integrity Verification**: Automatic validation of the entire blockchain at the end of the game to detect any data tampering.
-- **🔄 Game Replay System**: A built-in replay engine that reconstructs the game state directly from the blockchain data to verify consistency.
+- **🛡️ Dynamic Combat System**: Strategic turn-based gameplay involving Attacks, Defenses, and Heals.
+- **🌳 Merkle Tree Verification**: Transactions are hashed into a Merkle Root within each block, allowing for efficient and secure data integrity checks.
+- **⛏️ Proof-of-Work (PoW)**: A rigorous mining mechanism (CPU-based) that secures the network by requiring a specific hash prefix.
+- **📜 Immutable Ledger**: A transparent, tamper-proof history of every move made in the game.
+- **💻 Full-Stack Experience**:
+  - **Java Backend**: Core blockchain engine, replay system, and data persistence.
+  - **React & Vite Frontend**: A premium, responsive UI with real-time blockchain visualization and combat animations.
+- **📊 Automated JSON Export**: At the conclusion of a battle, the final game state, including the complete blockchain and winner details, is automatically exported to a JSON audit log.
 
 ---
 
 ## 🏗️ Project Architecture
 
-The project is organized into several core components:
+### ☕ Java Core (`/src`)
 
-- **`Main.java`**: The entry point. Orchestrates player initialization, the battle sequence, and the final replay verification.
-- **`BattleEngine.java`**: The core game loop. Manages player turns, processes inputs, and interfaces with the blockchain to record actions.
-- **`Blockchain.java`**: The ledger manager. Handles the chain of blocks, provides validation logic, and persists data to disk.
-- **`GameBlock.java`**: The fundamental data structure of the chain. Contains the transaction list, timestamp, nonce, and mining logic.
-- **`GameTransaction.java`**: Represents an atomic game action (e.g., Damage dealt, HP restored).
-- **`GameReplay.java`**: A verification tool that re-runs the game logic using only the data stored on the blockchain.
-- **`Player.java`**: Manages player state, including health points (HP) and defensive capabilities.
-- **`StringUtil.java`**: A utility class providing SHA-256 hashing via Java's `MessageDigest`.
+- **`Blockchain.java`**: The central authority managing the chain, mining difficulty, and JSON/Text persistence.
+- **`GameBlock.java`**: Implements the block structure including Merkle Roots and SHA-256 linking.
+- **`StringUtil.java`**: Cryptographic utility for SHA-256 and Merkle Tree generation.
+- **`BattleEngine.java`**: Manages the local terminal-based battle loop.
+- **`GameReplay.java`**: Verifies the chain by reconstructing game state from transactions.
+
+### ⚛️ Frontend UI (`/frontend`)
+
+- **`App.tsx`**: Main game controller managing the React state and blockchain integration.
+- **`logic/GameBlock.ts`**: TypeScript implementation of the blockchain logic (mirrors Java core).
+- **`components/BlockView.tsx`**: Visualizes blocks in real-time, showing Hashes, Merkle Roots, and Nonces.
+- **`components/PlayerCard.tsx`**: Displays player stats with health bars and status indicators.
 
 ---
 
-## 🎮 How to Play
+## 🚀 Getting Started
 
-### 1. Setup & Execution
+### 1. Run the Terminal Version (Java)
 
-Compile and run the `Main` class using your favorite IDE or the command line:
+To experience the core logic via command line:
 
-```bash
-javac src/*.java -d out
+```powershell
+# Compile the source
+javac -d out src/*.java
+
+# Run the game
 java -cp out Main
 ```
 
-### 2. Gameplay Mechanics
+### 2. Run the Web Version (React)
 
-During your turn, you can choose one of three actions:
+To experience the premium visual interface:
 
-- **`1` Attack**: Strike your opponent. Damage is mitigated by the opponent's current defense.
-- **`2` Defend**: Brace for impact. Increases your defense for the next incoming attack.
-- **`3` Heal**: Use a potion to restore a portion of your health.
+```bash
+# Navigate to frontend
+cd frontend
 
-### 3. The Blockchain Process
+# Install dependencies
+npm install
 
-1. **Action Recording**: Your moves are stored as transactions.
-2. **Block Creation**: After each round, transactions are bundled into a new block.
-3. **Mining**: The system performs Proof-of-Work mining (finding a hash with 3 leading zeros).
-4. **Chain Extension**: The mined block is linked to the previous block's hash and added to the chain.
+# Start development server
+npm run dev
+```
 
 ---
 
 ## ⚙️ Technical Specifications
 
-| Component       | Technology                          |
-| :-------------- | :---------------------------------- |
-| **Language**    | Java 8+                             |
-| **Hashing**     | SHA-256                             |
-| **Consensus**   | Proof-of-Work (PoW)                 |
-| **Difficulty**  | 3 (Adjustable in `Blockchain.java`) |
-| **Persistence** | `blockchain_data.txt`               |
+| Feature                 | Specification                       |
+| :---------------------- | :---------------------------------- |
+| **Language**            | Java 8+ / TypeScript & React        |
+| **Hashing Algorithm**   | SHA-256                             |
+| **Integrity Check**     | Merkle Tree (Merkle Root per Block) |
+| **Consensus Mechanism** | Proof-of-Work (PoW)                 |
+| **Mining Difficulty**   | 3 (Trailing Zeros)                  |
+| **Data Persistence**    | `.txt` (Log) & `.json` (Audit)      |
 
 ---
 
-## 📊 Sample Output
+## 📂 Data Export Format
 
-```text
-⚔️ BLOCKBATTLE STARTED ⚔️
-Player-A choose action: 1.Attack  2.Defend  3.Heal
-1
-⛏️ Block Mined: 000a1b2c3d4e5f...
-Player-A Health: 100
-Player-B Health: 85
-----------------------------------
-...
-🏆 WINNER: Player-A
-Blockchain valid: true
-✅ Blockchain data saved to blockchain_data.txt
+At the end of every game, a `winner_data.json` is generated. It follows this structure:
+
+```json
+{
+  "winner": "Player-B",
+  "minedBlocks": [
+    {
+      "blockIndex": 1,
+      "hash": "000ad691...",
+      "previousHash": "9fc071b5...",
+      "merkleRoot": "ee1eabc1...",
+      "transactions": [
+        { "playerId": "Player-A", "action": "ATTACK", "value": 14 },
+        { "playerId": "Player-B", "action": "ATTACK", "value": 13 }
+      ]
+    }
+  ]
+}
 ```
 
 ---
 
-_This project serves as an educational demonstration of how blockchain principles can be applied to ensure data integrity in gaming environments._
+## 📜 License
+
+This project is for educational purposes, demonstrating the application of blockchain data structures in a gaming environment.
+
+_Crafted with ❤️ for the Blockchain Community._
