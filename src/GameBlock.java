@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 import java.util.Date;
+
 public class GameBlock {
     public String hash;
     public String previousHash;
+    public String merkleRoot;
     public ArrayList<GameTransaction> transactions;
     private long timeStamp;
     private int nonce;
@@ -11,6 +13,7 @@ public class GameBlock {
         this.previousHash = previousHash;
         this.transactions = transactions;
         this.timeStamp = new Date().getTime();
+        this.merkleRoot = StringUtil.getMerkleRoot(transactions);
         this.hash = calculateHash();
     }
 
@@ -19,8 +22,7 @@ public class GameBlock {
                 previousHash +
                         Long.toString(timeStamp) +
                         Integer.toString(nonce) +
-                        transactions.toString()
-        );
+                        merkleRoot);
     }
 
     public void mineBlock(int difficulty) {

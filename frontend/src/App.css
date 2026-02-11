@@ -1,0 +1,134 @@
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+.arena {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  perspective: 1000px;
+}
+
+.vs-badge {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #444;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+.controls-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.action-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-attack {
+  background: #ff4444;
+  color: white;
+}
+.btn-attack:hover { background: #cc3333; transform: translateY(-2px); }
+
+.btn-defend {
+  background: #4488ff;
+  color: white;
+}
+.btn-defend:hover { background: #3366cc; transform: translateY(-2px); }
+
+.btn-heal {
+  background: #00cc88;
+  color: white;
+}
+.btn-heal:hover { background: #00aa77; transform: translateY(-2px); }
+
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  filter: grayscale(1);
+}
+
+.logs-container {
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 8px;
+  height: 150px;
+  overflow-y: auto;
+  text-align: left;
+  padding: 1rem;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+.log-entry {
+  margin-bottom: 4px;
+  color: #888;
+}
+
+.log-block-mined {
+  color: #ffd700;
+  border-top: 1px solid #333;
+  padding-top: 4px;
+  margin-top: 4px;
+}
+
+.blockchain-container {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: 12px;
+  width: 100%;
+}
+
+.game-title {
+  font-size: 3rem;
+  background: linear-gradient(to right, #646cff, #ff4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.reset-btn {
+  margin-top: 20px;
+  background: #333;
+  color: #fff;
+  border: 1px solid #555;
+}
